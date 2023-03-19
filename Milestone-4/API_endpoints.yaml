@@ -2,33 +2,35 @@ openapi: 3.0.3
 info:
   title: Project API
   version: 1.0.0.0
-  description: API for getting user details
+  description: API Description for Support Management System
 servers:
-  - url: http://127.0.0.1:5000
+  - url: https://127.0.0.1:5000
     variables: {}
 tags:
   - name: User_API
-    description: API for add user , delete user and post user .
+    description: API for add USER , delete USER and get USER and update USER.
   - name: Query_API
-    description: All API for query
+    description: API for add QUERY , delete QUERY and get QUERY and update QUERY.
   - name: FAQ_API
-    description: All the operations regarding FAQ
+    description: API for add FAQ , delete FAQ and get FAQ and update FAQ.
 paths:
   /api/client:
     description: To add user , get all user
     post:
       tags:
         - User_API
-      summary: To add any user
+      summary: To add a new user
       description: To add user
-      request:
+      requestBody:
+        required: True
+        description: Add a new User
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 email:
                   type: string
@@ -36,18 +38,9 @@ paths:
                 password:
                   type: string
                   example: aditya@123
-                active:
-                  type: boolean
-                  example: true
-                confirmed_at:
-                  type: DateTime
-                  example: 12/02/22
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
+                role:
+                  type: string
+                  example: student
       operationId: '1'
       responses:
         '201':
@@ -83,16 +76,16 @@ paths:
     get:
       tags:
         - User_API
-      summary: ''
+      summary: 'To get the details of all users'
       description: To get the details of all users
       operationId: '2'
       responses:
-        '203':
-          description: success
+        '200':
+          description: Success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     email: aditya@gmail.com
@@ -125,20 +118,20 @@ paths:
         in: path
         schema:
           type: integer
-          example: 21
+          example: primary_key 
     get:
       tags:
         - User_API
-      summary: ''
+      summary: 'To access a specific user'
       description: To get the user by id
       operationId: '3'
       responses:
-        '203':
-          description: success
+        '200':
+          description: Success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     email: aditya@gmail.com
@@ -165,7 +158,7 @@ paths:
       tags:
         - User_API
       summary: Deletes a User
-      description: delete a User
+      description: Delete an existing User
       operationId: deleteUser
       parameters:
         - name: client_id
@@ -173,8 +166,22 @@ paths:
           in: path
           schema:
             type: integer
-            example: 21
+            example: primary_key 
       responses:
+        '200':
+          description: Deleted this Object
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value:
+                    id: 1
+                    email: aditya@gmail.com
+                    password: aditya@123
+                    active: true
+                    confirmed_at: 12/02/22
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
         '404':
           description: Invalid User value
           content:
@@ -190,14 +197,14 @@ paths:
       summary: Update an existing User
       description: Update an existing User by Id
       operationId: updateUser
-      request:
+      requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 email:
                   type: string
@@ -208,15 +215,6 @@ paths:
                 active:
                   type: boolean
                   example: true
-                confirmed_at:
-                  type: DateTime
-                  example: 12/02/22
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
       responses:
         '201':
           description: success - return newly updated object
@@ -255,14 +253,14 @@ paths:
         - Query_API
       summary: To add any query
       description: To add query
-      request:
+      requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 issue:
                   type: string
@@ -277,14 +275,8 @@ paths:
                   type: string
                   example: Andrew
                 upvotes:
-                  type: int
+                  type: integer
                   example: 10
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
       operationId: querypost
       responses:
         '201':
@@ -321,16 +313,16 @@ paths:
     get:
       tags:
         - Query_API
-      summary: ''
+      summary: 'To access all queries'
       description: To get all the query
       operationId: GetAllQuery
       responses:
-        '203':
+        '200':
           description: success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     issue: problem regarding quiz marks
@@ -364,20 +356,20 @@ paths:
         in: path
         schema:
           type: integer
-          example: 21
+          example: primary_key 
     get:
       tags:
         - Query_API
-      summary: ''
+      summary: 'To access a specific Query'
       description: To get the query by id
       operationId: GetQueryById
       responses:
-        '203':
-          description: success
+        '200':
+          description: Success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     issue: problem regarding quiz marks
@@ -405,7 +397,7 @@ paths:
       tags:
         - Query_API
       summary: Deletes a Query by Id
-      description: delete a Query
+      description: Delete a Query
       operationId: deleteQuery
       parameters:
         - name: query_id
@@ -413,8 +405,23 @@ paths:
           in: path
           schema:
             type: integer
-            example: 21
+            example: primary_key 
       responses:
+        '200':
+          description: Deleted this Object
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    created_by: Sachin
+                    answered_by: Andrew
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
         '404':
           description: Invalid Query value
           content:
@@ -430,14 +437,14 @@ paths:
       summary: Update an existing Query
       description: Update an existing Query by Id
       operationId: updateQuery
-      request:
+      requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 issue:
                   type: string
@@ -452,14 +459,8 @@ paths:
                   type: string
                   example: Andrew
                 upvotes:
-                  type: int
+                  type: integer
                   example: 10
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
       responses:
         '201':
           description: success - return newly updated query
@@ -497,16 +498,17 @@ paths:
     post:
       tags:
         - FAQ_API
-      summary: To add any faq
+      summary: To add a FAQ
       description: To add faq
-      request:
+      requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 issue:
                   type: string
@@ -515,14 +517,8 @@ paths:
                   type: string
                   example: marks will be updated in two days
                 upvotes:
-                  type: int
+                  type: integer
                   example: 10
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
       operationId: faqpost
       responses:
         '201':
@@ -557,16 +553,16 @@ paths:
     get:
       tags:
         - FAQ_API
-      summary: ''
+      summary: 'To access all FAQ'
       description: To get all the faq
       operationId: GetAllFAQ
       responses:
-        '203':
+        '200':
           description: success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     issue: problem regarding quiz marks
@@ -598,20 +594,20 @@ paths:
         in: path
         schema:
           type: integer
-          example: 21
+          example: primary_key 
     get:
       tags:
         - FAQ_API
-      summary: ''
+      summary: 'To get the FAQ by id'
       description: To get the FAQ by id
       operationId: GetFAQById
       responses:
-        '203':
-          description: success
+        '201':
+          description: Success
           content:
             application/json:
               examples:
-                Sample 203 response:
+                Sample 200 response:
                   value:
                     id: 1
                     issue: problem regarding quiz marks
@@ -645,8 +641,21 @@ paths:
           in: path
           schema:
             type: integer
-            example: 21
+            example: primary_key 
       responses:
+        '200':
+          description: Deleted this Object
+          content:
+            application/json:
+              examples:
+                Sample 200 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
         '404':
           description: Invalid FAQ value
           content:
@@ -662,14 +671,14 @@ paths:
       summary: Update an existing FAQ
       description: Update an existing FAQ by Id
       operationId: updateFAQ
-      request:
+      requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
                 id:
-                  type: int
+                  type: integer
                   example: 1
                 issue:
                   type: string
@@ -678,14 +687,8 @@ paths:
                   type: string
                   example: marks will be updated in two days
                 upvotes:
-                  type: int
+                  type: integer
                   example: 10
-                created_on:
-                  type: DateTime
-                  example: 12/02/22
-                updated_on:
-                  type: DateTime
-                  example: 12/02/22
       responses:
         '201':
           description: success - return newly updated FAQ
