@@ -1,0 +1,718 @@
+openapi: 3.0.3
+info:
+  title: Project API
+  version: 1.0.0.0
+  description: API for getting user details
+servers:
+  - url: http://127.0.0.1:5000
+    variables: {}
+tags:
+  - name: User_API
+    description: API for add user , delete user and post user .
+  - name: Query_API
+    description: All API for query
+  - name: FAQ_API
+    description: All the operations regarding FAQ
+paths:
+  /api/client:
+    description: To add user , get all user
+    post:
+      tags:
+        - User_API
+      summary: To add any user
+      description: To add user
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                email:
+                  type: string
+                  example: aditya@gmail.com
+                password:
+                  type: string
+                  example: aditya@123
+                active:
+                  type: boolean
+                  example: true
+                confirmed_at:
+                  type: DateTime
+                  example: 12/02/22
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      operationId: '1'
+      responses:
+        '201':
+          description: success - return newly created object
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    email: aditya@gmail.com
+                    password: aditya@123
+                    active: true
+                    confirmed_at: 12/02/22
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+    get:
+      tags:
+        - User_API
+      summary: ''
+      description: To get the details of all users
+      operationId: '2'
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    email: aditya@gmail.com
+                    password: aditya@123
+                    active: true
+                    confirmed_at: 12/02/22
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: User not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+  /api/client/{client_id}:
+    description: To access user by id
+    parameters:
+      - name: client_id
+        required: true
+        in: path
+        schema:
+          type: integer
+          example: 21
+    get:
+      tags:
+        - User_API
+      summary: ''
+      description: To get the user by id
+      operationId: '3'
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    email: aditya@gmail.com
+                    password: aditya@123
+                    active: true
+                    confirmed_at: 12/02/22
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: User not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+    delete:
+      tags:
+        - User_API
+      summary: Deletes a User
+      description: delete a User
+      operationId: deleteUser
+      parameters:
+        - name: client_id
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 21
+      responses:
+        '404':
+          description: Invalid User value
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        default:
+          description: Default error sample response
+    put:
+      tags:
+        - User_API
+      summary: Update an existing User
+      description: Update an existing User by Id
+      operationId: updateUser
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                email:
+                  type: string
+                  example: aditya@gmail.com
+                password:
+                  type: string
+                  example: aditya@123
+                active:
+                  type: boolean
+                  example: true
+                confirmed_at:
+                  type: DateTime
+                  example: 12/02/22
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      responses:
+        '201':
+          description: success - return newly updated object
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    email: aditya@gmail.com
+                    password: aditya@123
+                    active: true
+                    confirmed_at: 12/02/22
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+  /api/query:
+    description: To do all operation on query
+    post:
+      tags:
+        - Query_API
+      summary: To add any query
+      description: To add query
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                issue:
+                  type: string
+                  example: problem regarding marks
+                solution:
+                  type: string
+                  example: marks will be updated in two days
+                created_by:
+                  type: string
+                  example: Sachin
+                answered_by:
+                  type: string
+                  example: Andrew
+                upvotes:
+                  type: int
+                  example: 10
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      operationId: querypost
+      responses:
+        '201':
+          description: success - return newly query object
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    created_by: Sachin
+                    answered_by: Andrew
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+    get:
+      tags:
+        - Query_API
+      summary: ''
+      description: To get all the query
+      operationId: GetAllQuery
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    created_by: Sachin
+                    answered_by: Andrew
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: Query not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+  /api/query/{query_id}:
+    description: To do all operations on query by query_id
+    parameters:
+      - name: query_id
+        required: true
+        in: path
+        schema:
+          type: integer
+          example: 21
+    get:
+      tags:
+        - Query_API
+      summary: ''
+      description: To get the query by id
+      operationId: GetQueryById
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    created_by: Sachin
+                    answered_by: Andrew
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: Query not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+    delete:
+      tags:
+        - Query_API
+      summary: Deletes a Query by Id
+      description: delete a Query
+      operationId: deleteQuery
+      parameters:
+        - name: query_id
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 21
+      responses:
+        '404':
+          description: Invalid Query value
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No query present
+        default:
+          description: Default error sample response
+    put:
+      tags:
+        - Query_API
+      summary: Update an existing Query
+      description: Update an existing Query by Id
+      operationId: updateQuery
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                issue:
+                  type: string
+                  example: problem regarding marks
+                solution:
+                  type: string
+                  example: marks will be updated in two days
+                created_by:
+                  type: string
+                  example: Sachin
+                answered_by:
+                  type: string
+                  example: Andrew
+                upvotes:
+                  type: int
+                  example: 10
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      responses:
+        '201':
+          description: success - return newly updated query
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    created_by: Himanshu
+                    answered_by: Andrew
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+  /api/faq:
+    description: oprations on faq
+    post:
+      tags:
+        - FAQ_API
+      summary: To add any faq
+      description: To add faq
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                issue:
+                  type: string
+                  example: problem regarding marks
+                solution:
+                  type: string
+                  example: marks will be updated in two days
+                upvotes:
+                  type: int
+                  example: 10
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      operationId: faqpost
+      responses:
+        '201':
+          description: success - return newly faq object
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+    get:
+      tags:
+        - FAQ_API
+      summary: ''
+      description: To get all the faq
+      operationId: GetAllFAQ
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: FAQ not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No user present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response
+  /api/faq/{faq_id}:
+    description: To do all operations on FAQ by faq_id
+    parameters:
+      - name: faq_id
+        required: true
+        in: path
+        schema:
+          type: integer
+          example: 21
+    get:
+      tags:
+        - FAQ_API
+      summary: ''
+      description: To get the FAQ by id
+      operationId: GetFAQById
+      responses:
+        '203':
+          description: success
+          content:
+            application/json:
+              examples:
+                Sample 203 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '404':
+          description: FAQ not found
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No FAQ present
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+    delete:
+      tags:
+        - FAQ_API
+      summary: Deletes a FAQ by Id
+      description: delete a FAQ
+      operationId: deleteFAQ
+      parameters:
+        - name: faq_id
+          required: true
+          in: path
+          schema:
+            type: integer
+            example: 21
+      responses:
+        '404':
+          description: Invalid FAQ value
+          content:
+            application/json:
+              examples:
+                Sample 404 response:
+                  value: No FAQ present
+        default:
+          description: Default error sample response
+    put:
+      tags:
+        - FAQ_API
+      summary: Update an existing FAQ
+      description: Update an existing FAQ by Id
+      operationId: updateFAQ
+      request:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: int
+                  example: 1
+                issue:
+                  type: string
+                  example: problem regarding marks
+                solution:
+                  type: string
+                  example: marks will be updated in two days
+                upvotes:
+                  type: int
+                  example: 10
+                created_on:
+                  type: DateTime
+                  example: 12/02/22
+                updated_on:
+                  type: DateTime
+                  example: 12/02/22
+      responses:
+        '201':
+          description: success - return newly updated FAQ
+          content:
+            application/json:
+              examples:
+                sample 201 response:
+                  value:
+                    id: 1
+                    issue: problem regarding quiz marks
+                    solution: marks will updated in two days
+                    upvotes: 10
+                    created_on: 10/02/22
+                    updated_on: 15/02/22
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Sample 400 respone:
+                  value: Bad Request
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              examples:
+                Sample 500 response:
+                  value: Internal Error
+        default:
+          description: Default error sample response    
