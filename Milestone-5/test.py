@@ -19,7 +19,7 @@ def test_create_user():
     # Assert that the response body is what we expect.
     assert response.json()["email"] == "test@example.com"
     assert response.json()["password"] == "password"
-    assert response.json()["role_name"] == "Student"
+    assert response.json()['role_details']["role_name"] == "Student"
 
 
 def test_get_user_all():
