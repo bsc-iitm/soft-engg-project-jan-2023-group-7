@@ -23,7 +23,7 @@ def test_create_user():
 
 
 def test_get_user_all():
-    url = "http://0.0.0.0:8080/api/client/1"
+    url = "http://0.0.0.0:8080/api/client"
 
     response = requests.get(url)
 
