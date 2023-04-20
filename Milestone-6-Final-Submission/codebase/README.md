@@ -41,7 +41,7 @@ sudo chmod +x setup.sh
 ./setup.sh
 python3 db_initializer.py
 ```
-# METHOD TO INITIALIZE DB FOR TESTING -
+# METHOD TO RUN BROWSER BASED DB VIEWER FOR TESTING -
 ```
 CLONE THIS REPO
 sudo chmod +x setup.sh
