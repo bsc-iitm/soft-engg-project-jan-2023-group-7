@@ -155,6 +155,21 @@ def see_all_users():
     # return the teachers list
     return render_template("all_users.html", admins=admins)
 
+@app.route('/showfaq')
+def r1():
+    return render_template("show_faq.html")
+@app.route('/ins')
+def r2():
+    return render_template("instructor_dashboard.html")
+@app.route('/ins2')
+def r5():
+    return render_template("query_answer_instructor.html")
+@app.route('/query_submit')
+def r3():
+    return render_template("query_submission.html")
+@app.route("/allquery")
+def r4():
+    return render_template("all_query.html")
 
 # Api Intialisation
 api = Api(app)

@@ -17,26 +17,30 @@
     <header class="bg-gray-400 h-20 ">
         <nav class="flex justify-between items-center w-[92%]  mx-auto py-4">
             <div>
-                Canny
+                Ticket Management System
             </div>
             <div
                 class="nav-links duration-500 md:static absolute bg-gray-400 text-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 ">
                     <li>
-                        <a class="hover:text-blue-600" href="#">Ask Query</a>
+                        <a class="hover:text-blue-600" href="/query_submit">Ask Query</a>
                     </li>
                     <li>
-                        <a class="hover:text-blue-600" href="#">All Query</a>
+                        <a class="hover:text-blue-600" href="/ins">Instructor Dashboard</a>
                     </li>
                     <li>
-                        <a class="hover:text-blue-600" href="#">FAQ</a>
+                        <a class="hover:text-blue-600" href="/showfaq">FAQ</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-blue-600" href="/ins2">Resolve Query</a>
                     </li>
                     
                 </ul>
             </div>
             <div class="flex items-center gap-6">
-                <button class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign in</button>
-                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
+                <a href="/sign_in" class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign in</a>
+                <a href="/signup" class="bg-[#a6c1ee] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Sign up</a>
+                    <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
     </header>
 
