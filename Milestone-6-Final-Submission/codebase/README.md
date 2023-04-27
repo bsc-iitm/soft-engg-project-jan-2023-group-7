@@ -39,6 +39,7 @@ python3 app.py
 CLONE THIS REPO
 sudo chmod +x setup.sh
 ./setup.sh
+source ../py/bin/activate
 python3 db_initializer.py
 ```
 # METHOD TO RUN BROWSER BASED DB VIEWER FOR TESTING -
@@ -47,6 +48,7 @@ CLONE THIS REPO
 sudo chmod +x setup.sh
 ./setup.sh
 sudo chmod +x sql.sh
+source ../py/bin/activate
 ./sql.sh
 ```
 
